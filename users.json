@@ -1,0 +1,12 @@
+[
+  {
+    "userId": "57209",
+    "refreshToken": "eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoia2ZVcmYwcUdhVDkyVi9IbmI2b0hYdz09OnJ3dGVVckRyUEtSbWZRVWk0OHdyKzhEakNhczE4ems2cE4xdG1rbzIvdzh3bWs5ODVna2psL1dkZGJxWnFFdXNMSU9jY0tNZHQ1RVZuZTJhMTdJNDNscld1cDF4SGxEZmRpOFNvL05kUUpzcnh1d0J2TTdwMW15eTBqSTN1MldOdVBSSXMyZzcvdzlYQzVvRk9CUFJ1bnRLU21nTjl1QTNPNHh0ZFVTYU5GTXdnZ2M3bXpIdXNhMjhta2dqYVkydDhqeXVCTjNKTGlpQ3hTN0g4NkhMRnMwVHU1ZnlOc0gzS1ltRisrT2dsdTg9IiwidmVyc2lvbiI6MSwiaWF0IjoxNzU1NDI2NzkwLCJpc3MiOiJlcGljcy5nZyJ9.zlsCTBQSe6xsgaJ_bJP5RGiBJASENntQ9Xh6YsFJk2CUWkPT3snUptIuk7vwUkxf",
+    "userClaimAchivID": "57209",
+    "dayStart": "5:27",
+    "dayEnd": "22:19",
+    "baseInterval": "30",
+    "randomScale1": "0",
+    "randomScale2": "37"
+  }
+]
