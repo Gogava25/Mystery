@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Automated MegaTool for special requests",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
