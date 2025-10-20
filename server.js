@@ -66,22 +66,32 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // 🎯 SIMPLE CONFIGURATION
-const CONFIG = {
-    BASE_URL: process.env.BASE_URL,
-    BASE_URL_REF: process.env.BASE_URL_REF,
-    BASE_URL_MONEY: process.env.BASE_URL_MONEY,
-    BASE_URL_SPRAY: process.env.BASE_URL_SPRAY,
-    BASE_URL_ACH: process.env.BASE_URL_ACH,
-	//PORT = process.env.PORT || 3000;
-    USERS_FILE: 'users.json',
-};
+export default {
+  async fetch(request, env, ctx) {
+    // 🎯 SIMPLE CONFIGURATION
+    const CONFIG = {
+        BASE_URL: env.BASE_URL,
+        BASE_URL_REF: env.BASE_URL_REF,
+        BASE_URL_MONEY: env.BASE_URL_MONEY,
+        BASE_URL_SPRAY: env.BASE_URL_SPRAY,
+        BASE_URL_ACH: env.BASE_URL_ACH,
+        USERS_FILE: 'users.json',
+    };
 
-const BASE_URL = CONFIG.BASE_URL;
-const BASE_URL_REF = CONFIG.BASE_URL_REF;
-const BASE_URL_MONEY = CONFIG.BASE_URL_MONEY;
-const BASE_URL_SPRAY = CONFIG.BASE_URL_SPRAY;
-const BASE_URL_ACH = CONFIG.BASE_URL_ACH;
-const USERS_CONFIG = CONFIG.USERS_FILE;
+    const BASE_URL = CONFIG.BASE_URL;
+    const BASE_URL_REF = CONFIG.BASE_URL_REF;
+    const BASE_URL_MONEY = CONFIG.BASE_URL_MONEY;
+    const BASE_URL_SPRAY = CONFIG.BASE_URL_SPRAY;
+    const BASE_URL_ACH = CONFIG.BASE_URL_ACH;
+    const USERS_CONFIG = CONFIG.USERS_FILE;
+
+    // ✅ Now use your variables here
+    // Example:
+    const response = await fetch(`${BASE_URL}/some-endpoint`);
+    
+    return new Response("It works!");
+  }
+}
 
 // Global storage for user data and logs
 let userData = {};
