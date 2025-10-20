@@ -1,11 +1,12 @@
-const express = require('express');
-const cron = require('node-cron');
-const axios = require('axios');
-const fs = require('fs').promises;
-const path = require('path');
+import express from 'express';
+import cron from 'node-cron';
+import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const fsPromises = fs.promises;
 
 // 🎯 ENHANCED DEBUGGING - You'll see EVERYTHING in console AND browser!
 const debugLogs = [];
@@ -156,7 +157,7 @@ function startImmediateOperations() {
 // Load user configuration from file
 async function loadUserConfig() {
     try {
-        const configData = await fs.readFile(USERS_CONFIG, 'utf8');
+        const configData = await fsPromises.readFile(USERS_CONFIG, 'utf8');
         const users = JSON.parse(configData);
         
         for (const user of users) {
@@ -538,13 +539,13 @@ function timeToMinutes(timeStr) {
 // Update user configuration file
 async function updateUserConfig(userId, field, value) {
     try {
-        const configData = await fs.readFile(USERS_CONFIG, 'utf8');
+        const configData = await fsPromises.readFile(USERS_CONFIG, 'utf8');
         const users = JSON.parse(configData);
         const userIndex = users.findIndex((u) => u.userId === userId);
         
         if (userIndex !== -1) {
             users[userIndex][field] = value;
-            await fs.writeFile(USERS_CONFIG, JSON.stringify(users, null, 2));
+            await fsPromises.writeFile(USERS_CONFIG, JSON.stringify(users, null, 2));
         }
     } catch (error) {
         console.error('Error updating user config:', error);
