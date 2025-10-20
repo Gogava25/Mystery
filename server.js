@@ -2,11 +2,9 @@ import express from 'express';
 import cron from 'node-cron';
 import axios from 'axios';
 import fs from 'fs';
-import path from 'path';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const fsPromises = fs.promises;
 
 // 🎯 ENHANCED DEBUGGING - You'll see EVERYTHING in console AND browser!
 const debugLogs = [];
@@ -67,32 +65,21 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // 🎯 SIMPLE CONFIGURATION
-export default {
-  async fetch(request, env, ctx) {
-    // 🎯 SIMPLE CONFIGURATION
-    const CONFIG = {
-        BASE_URL: env.BASE_URL,
-        BASE_URL_REF: env.BASE_URL_REF,
-        BASE_URL_MONEY: env.BASE_URL_MONEY,
-        BASE_URL_SPRAY: env.BASE_URL_SPRAY,
-        BASE_URL_ACH: env.BASE_URL_ACH,
-        USERS_FILE: 'users.json',
-    };
+const CONFIG = {
+    BASE_URL: process.env.BASE_URL,
+    BASE_URL_REF: process.env.BASE_URL_REF,
+    BASE_URL_MONEY: process.env.BASE_URL_MONEY,
+    BASE_URL_SPRAY: process.env.BASE_URL_SPRAY,
+    BASE_URL_ACH: process.env.BASE_URL_ACH,
+    USERS_FILE: 'users.json',
+};
 
-    const BASE_URL = CONFIG.BASE_URL;
-    const BASE_URL_REF = CONFIG.BASE_URL_REF;
-    const BASE_URL_MONEY = CONFIG.BASE_URL_MONEY;
-    const BASE_URL_SPRAY = CONFIG.BASE_URL_SPRAY;
-    const BASE_URL_ACH = CONFIG.BASE_URL_ACH;
-    const USERS_CONFIG = CONFIG.USERS_FILE;
-
-    // ✅ Now use your variables here
-    // Example:
-    const response = await fetch(`${BASE_URL}/some-endpoint`);
-    
-    return new Response("It works!");
-  }
-}
+const BASE_URL = CONFIG.BASE_URL;
+const BASE_URL_REF = CONFIG.BASE_URL_REF;
+const BASE_URL_MONEY = CONFIG.BASE_URL_MONEY;
+const BASE_URL_SPRAY = CONFIG.BASE_URL_SPRAY;
+const BASE_URL_ACH = CONFIG.BASE_URL_ACH;
+const USERS_CONFIG = CONFIG.USERS_FILE;
 
 // Global storage for user data and logs
 let userData = {};
@@ -157,7 +144,7 @@ function startImmediateOperations() {
 // Load user configuration from file
 async function loadUserConfig() {
     try {
-        const configData = await fsPromises.readFile(USERS_CONFIG, 'utf8');
+        const configData = await fs.promises.readFile(USERS_CONFIG, 'utf8');
         const users = JSON.parse(configData);
         
         for (const user of users) {
@@ -539,13 +526,13 @@ function timeToMinutes(timeStr) {
 // Update user configuration file
 async function updateUserConfig(userId, field, value) {
     try {
-        const configData = await fsPromises.readFile(USERS_CONFIG, 'utf8');
+        const configData = await fs.promises.readFile(USERS_CONFIG, 'utf8');
         const users = JSON.parse(configData);
         const userIndex = users.findIndex((u) => u.userId === userId);
         
         if (userIndex !== -1) {
             users[userIndex][field] = value;
-            await fsPromises.writeFile(USERS_CONFIG, JSON.stringify(users, null, 2));
+            await fs.promises.writeFile(USERS_CONFIG, JSON.stringify(users, null, 2));
         }
     } catch (error) {
         console.error('Error updating user config:', error);
